@@ -34,3 +34,29 @@ val kitten = new Kitten("pochi");
 kitten.cry();
 println(kitten.count)
 ```
+# use Trait
+```scala
+trait Pet{
+  val name: String;
+  val roar: String;
+  private var count: Int = 0;
+  def cry(): Unit = println(name + " cry " +roar);
+  def increment(): Int = {
+    count += 1;
+    count;
+  }
+}
+
+class Cat(val name: String, val roar: String = "meow") extends Pet{}
+
+val cat = new Cat("cat");
+cat.cry();
+println(cat.increment())
+
+class Kitten(name: String, override val roar: String = "mie") extends Cat(name, roar){
+  override def cry(): Unit = println(name + " cry " + roar);
+}
+
+val kitten = new Kitten("kitten", "mie");
+kitten.cry()
+```
