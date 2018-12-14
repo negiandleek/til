@@ -60,3 +60,29 @@ class Kitten(name: String, override val roar: String = "mie") extends Cat(name, 
 val kitten = new Kitten("kitten", "mie");
 kitten.cry()
 ```
+
+# mixin
+```scala
+abstract class Animal{
+  val name: String;
+}
+
+trait Pet{
+  val nickname: String;
+}
+
+class Dog(val name: String, val nickname: String) extends Animal with Pet
+
+class Golden(name: String, nickname: String) extends Dog(name, nickname);
+
+val dog = new Dog("dog", "pochi");
+
+println(dog.name,  dog.nickname);
+```
+
+## コンパイルエラー
+```scala
+  class A
+  class B
+  class C extends A with B
+```
