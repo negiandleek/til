@@ -47,3 +47,13 @@ val japanese:Seq[Int] = Seq(100,200,300);
 val yen: String = "¥";
 payment.payJa(japanese, yen);
 ```
+
+# Return Func
+```scala
+def returnFunc(x: Int): (Int) => (Int, Int) = {
+  (y: Int) => (x * y, x + y) 
+}
+  
+val a = returnFunc(2)
+val b = a(3)
+```
