@@ -1,3 +1,4 @@
+# currying
 ```scala
 val nums = List(1,2,3,4);
 val r = nums.foldLeft(0)((x: Int, y: Int) => x + y)
