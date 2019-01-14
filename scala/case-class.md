@@ -6,4 +6,7 @@ println(dog); //Pet(pochi,DOG,10)
 
 val dog2 = dog.copy(name = "hachi", age = 2);
 println(dog2) //Pet(hachi,DOG,2)
+
+val dog3 = Pet("pochi", "DOG", 10);
+println(dog == dog3)
 ```
