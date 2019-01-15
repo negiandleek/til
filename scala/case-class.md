@@ -28,3 +28,24 @@ def born(creature: Creature) = creature match {
 born(Fish("koi")) // fish:koi
 born(Animal("dog", "wolf")) //dog: wolf
 ```
+
+# And If
+```scala
+abstract class Message;
+case class Phone(phoneNumber: Int, message: String) extends Message;
+
+def checkImportantMessage(message: Message, subscribed: Seq[Int]): String = {
+  message match {
+    case Phone(phoneNumber, _) if subscribed.contains(phoneNumber) =>
+      "important";
+    case other => 
+      "other"
+  }
+}
+
+val subscribed = Seq(12341234);
+val test = new Phone(12341234, "Hi!!");
+val test2 = new Phone(43214321, "hi??")
+println(checkImportantMessage(test, subscribed)); // "important"
+println(checkImportantMessage(test2, subscribed)); // "other"
+```
