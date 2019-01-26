@@ -49,3 +49,18 @@ val test2 = new Phone(43214321, "hi??")
 println(checkImportantMessage(test, subscribed)); // "important"
 println(checkImportantMessage(test2, subscribed)); // "other"
 ```
+
+# Type Only
+```scala
+abstract class Phone;
+
+class MobilePhone extends Phone;
+class SmartPhone extends Phone;
+
+def newOrOld(p: Phone): String = p match {
+  case p: MobilePhone => "old"
+  case p: SmartPhone => "new"
+}
+
+println(newOrOld(new MobilePhone)) //old
+```
