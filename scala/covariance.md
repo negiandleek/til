@@ -1,20 +1,18 @@
 ```scala
-abstract class Food{
-  def name: String;
-};
-class Washoku(val name:String) extends Food;
-class Sushi(name: String) extends Washoku(name);
-class Italy(val name: String) extends Food;
+class Vegetable;
+class Carrot extends Vegetable;
+class Ginseng extends Carrot;
 
-class Menu[+T](val menu: List[T]){
-  def order(): Unit = {
-    menu.foreach {it  =>
-      println(it)
-    }
-  }
-}
+class InvarianceTest[A];
+class CovarianceTest[+A];
+class ContravarianceTest[-A];
 
-val japan = List(new Washoku("Udon"), new Sushi("Toro"));
-val japanMenu = new Menu[Washoku](japan);
-japanMenu.order();
+var a: InvarianceTest[Vegetable] = new InvarianceTest[Vegetable];
+// b = new InvarianceTest[Carrot];  //error
+var b: CovarianceTest[Carrot] = new CovarianceTest[Ginseng];
+b = new CovarianceTest[Carrot];
+// b = new ConvarianceTest[Vegetable]; //error
+
+var c: ContravarianceTest[Carrot] = new ContravarianceTest[Vegetable];
+// c = new ContravarianceTest[Ginseng]; //error
 ```
