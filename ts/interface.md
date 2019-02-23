@@ -1,3 +1,39 @@
+# Basic Simple
+```typescript
+interface Sample{
+    hoge: string;
+    fuga: string;
+};
+
+interface ExtendsSample{
+    piyo: number;
+    hogefuga: Sample
+};
+
+interface PickSample{
+    hoge: string;
+};
+
+const sample: Sample = {
+    hoge: "hoge",
+    fuga: "fuga"
+};
+
+const extendsSample: ExtendsSample = {
+    piyo: 0,
+    hogefuga: {
+        hoge: "hoge",
+        fuga: "fuga"
+    }
+};
+
+const pickSample: PickSample = sample;
+
+// 足りない場合はerrorになる
+// const inPickSample: Sample = {
+//     hoge: "hoge"
+// }
+```
 # Basic
 ```ts
 /* interface */
