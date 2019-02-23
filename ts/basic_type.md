@@ -1,3 +1,4 @@
+# Basic Simple
 ```ts
 /* basic type */
 const num: number = 0;
@@ -34,4 +35,14 @@ function returnNever(): never{
 function returnNestNever(): never{
 	return returnNever();
 }
+```
+
+# Array
+```typescript
+const arr: number[] = [1,2,3];
+const arrStrAndNum: [string, number] = ["str", 0];
+function getVariadic(first: (string|number), ...tail: (string|number)[]): void {
+    console.log(first, tail);
+}
+getVariadic("a", 0, "b");
 ```
