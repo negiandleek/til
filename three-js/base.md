@@ -62,3 +62,4 @@ const main = () => {
 
 document.addEventListener("DOMContentLoaded", main); 
 ```
+![image](https://raw.githubusercontent.com/youya66/til/master/three-js/images/base_result.png)
