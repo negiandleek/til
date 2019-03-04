@@ -1,15 +1,14 @@
 ```scala
 trait User{
-  val name: String;
+  def username: String;
+};
+
+trait Bird{
+  this: User => 
+  def tweet(): Unit = println(username + ":" + "tweettweet");
 }
 
-trait Tweeter{
-  this: User =>
-  def tweet(value: String): Unit = println(s"$name: $value");
-}
+class Exec(val username: String) extends User with Bird
 
-class VerifiedTweeter(val name: String) extends User with Tweeter;
-
-val tweet = new VerifiedTweeter("Mr");
-tweet.tweet("yahoooo!")
+new Exec("hoge").tweet() //hoge:tweettweet
 ```
