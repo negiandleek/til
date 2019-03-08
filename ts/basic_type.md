@@ -45,4 +45,6 @@ function getVariadic(first: (string|number), ...tail: (string|number)[]): void {
     console.log(first, tail);
 }
 getVariadic("a", 0, "b");
+
+const arr: [...number[]] = [1, 2, 3];
 ```
