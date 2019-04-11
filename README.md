@@ -1,2 +1,2 @@
 # til
-today I learned
+today I learned: little tips
