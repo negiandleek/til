@@ -1,5 +1,6 @@
 # coding: utf-8
 # Your code here!
+# TODO
 
 n = int(input().rstrip())
 
@@ -48,30 +49,49 @@ def find(key):
 def delete(key):
     global root
     node = find(key)
+    y = x = None
     if node is None:
         return 
     
-    # 削除するnodeが子を持たない
-    if node.left == None and node.right == None:
-        if node.parent == None:
-            root = None
-        else:
-            if node.parent.left == node:
-                node.parent.left = None
-            else:
-                node.parent.right = None
-    
-    elif node.left != None and node.right != None:
-        print("")
+    if node.left == None or node.right == None:
+        y = node
     else:
-        child = node.left if node.left != None else node.right
-        parent = node.parent
-        if parent.left == node:
-            parent.left = child
-            child.parent = parent
-        else:
-            parent.right = a
-            child.parent = parent
+        y = getSuccessor(node)
+    
+    # 子の操作
+    if y.left != None:
+        x = y.left
+    else:
+        x = y.right
+        
+    if x != None:
+        x.parent = y.parent
+        
+    if y.parent == None:
+        root = x
+    elif y == y.parent.left:
+        y.parent.left = x
+    else:
+        y.parent.right = x
+        
+    if y != node:
+        node.key = y.key      
+        
+def getSuccessor(node):
+    if node.right != None:
+        return getMinimum(node)
+    
+    y = node.parent
+    while y != None and node == y.right:
+        node = y
+        y = y.parent
+
+    return y
+    
+def getMinimum(node):
+    while node.left != None:
+        node = node.left
+    return node
     
 def inOrder(node):
     return inOrder(node.left) + " " + str(node.key) + inOrder(node.right) if node else ''
