@@ -1,6 +1,5 @@
 # coding: utf-8
 # Your code here!
-# TODO
 
 n = int(input().rstrip())
 
@@ -48,15 +47,13 @@ def find(key):
     
 def delete(key):
     global root
-    node = find(key)
+    z = find(key)
     y = x = None
-    if node is None:
-        return 
     
-    if node.left == None or node.right == None:
-        y = node
+    if z.left == None or z.right == None:
+        y = z
     else:
-        y = getSuccessor(node)
+        y = getSuccessor(z)
     
     # 子の操作
     if y.left != None:
@@ -74,16 +71,16 @@ def delete(key):
     else:
         y.parent.right = x
         
-    if y != node:
-        node.key = y.key      
+    if y != z:
+        z.key = y.key      
         
-def getSuccessor(node):
-    if node.right != None:
-        return getMinimum(node)
+def getSuccessor(x):
+    if x.right != None:
+        return getMinimum(x.right)
     
-    y = node.parent
-    while y != None and node == y.right:
-        node = y
+    y = x.parent
+    while y != None and x == y.right:
+        x = y
         y = y.parent
 
     return y
