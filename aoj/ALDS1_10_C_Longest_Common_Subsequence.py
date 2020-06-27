@@ -1,12 +1,13 @@
-# TODO:
+# TLE 
+# 参考にする -> https://onlinejudge.u-aizu.ac.jp/solutions/problem/ALDS1_10_C/review/3456820/kichi941/Python3
 n = int(input().rstrip())
 
 def lcs(x, y):
-    m = len(x)
-    n = len(y)
-    c = [ [0 for j in range(m)] for i in range(n) ]
+    m = len(x) + 1
+    n = len(y) + 1
+    c = [ [0 for j in range(n)] for i in range(m) ]
     maxL = 0
-    print(c)
+    
     for i in range(1, m):
         for j in range(1, n):
             if x[i-1] == y[j-1]:
