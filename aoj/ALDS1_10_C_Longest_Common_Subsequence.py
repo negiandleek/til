@@ -1,5 +1,4 @@
 # TLE 
-# 参考にする -> https://onlinejudge.u-aizu.ac.jp/solutions/problem/ALDS1_10_C/review/3456820/kichi941/Python3
 n = int(input().rstrip())
 
 def lcs(x, y):
@@ -23,3 +22,45 @@ for i in range(n):
     a = input().rstrip()
     b = input().rstrip()
     print(lcs(a, b))
+
+# 最適化したやつ
+
+def optLcs(x, y):
+    X = ' ' + x
+    Y = ' ' + y
+    m = len(X)
+    n = len(Y)
+    maxL = 0
+    c = [ [0 for j in range(n)] for i in range(m) ]
+    
+    pre_row = c[0]
+    for i in range(1, m):
+        row = c[i]
+        XX = X[i]
+        for j, YY in enumerate(Y):
+            if XX == YY:
+                pre = pre_row[j - 1]
+                row[j] = pre + 1
+                if row[j] > maxL:
+                    maxL = row[j]
+            else:
+                pre = pre_row[j]
+                column = row[j-1]
+                if pre >= column:
+                    row[j] = pre
+                else:
+                    row[j] = column
+        pre_row = row
+    return maxL
+
+# x = abc
+# y = bacd
+# i = row, j = column
+# [0, 0, 0, 0, 0] 
+# [0, 0, 1, 1, 1] 
+# [0, 1, 1, 1, 1]
+# [0, 1, 1, 2, 2]
+# [0, 1, 1, 1] 
+# [0, 1, 1, 2]
+# -> 2
+ 
