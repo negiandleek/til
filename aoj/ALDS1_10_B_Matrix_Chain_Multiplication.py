@@ -17,6 +17,7 @@ for l in range(1, N):
 print(dp[0][N-1])
 
 # わからないので後回し
+# http://daily-tech.hatenablog.com/entry/2018/09/29/203935
 n = int(input().rstrip())
 
 def calcMatrix(N, P):
