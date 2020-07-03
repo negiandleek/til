@@ -1,5 +1,5 @@
-# TODO:
-# https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_B
+# https://onlinejudge.u-aizu.ac.jp/problems/ALDS1_11_B
+
 N = int(input().rstrip())
 
 class Node:
@@ -40,12 +40,13 @@ def nextGraph(N):
     return result
             
     
-
-def depth(G, N):
+count = 0
+def depth(G, N, U):
+    global count
     Stack = []
-    count = 1
-    N[0].discovery = count
-    Stack.append(N[0])
+    count += 1
+    N[U].discovery = count
+    Stack.append(N[U])
     
     while Stack != []:
         node = Stack[len(Stack) - 1]
@@ -57,8 +58,10 @@ def depth(G, N):
         else:
             a = Stack.pop()
             a.finish = count
-            
-depth(Graph, Nodes)
+  
+for i in range(N):
+    if Nodes[i].discovery == 0:
+        depth(Graph, Nodes, i)
 
 for i in range(len(Nodes)):
     print(Nodes[i].toString())
