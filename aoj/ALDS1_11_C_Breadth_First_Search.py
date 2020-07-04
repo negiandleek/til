@@ -20,13 +20,25 @@ def generate(n):
     
 graph = generate(N)
 nodes = []
-count = 0
 for i in range(N):
     nodes.append(Node(i))
 
-def bfs(Graph, Nodes, U):
-    ...
+def bfs(Graph, Nodes, index, count):
+    stash = []
+    for v in range(N):
+        if Graph[index][v] == 1 and Nodes[v].depth == 0:
+            Nodes[v].depth = count + 1
+            stash.append(v)
+            
+    for v in range(len(stash)):
+        bfs(Graph, Nodes, stash[v], count + 1)
+        
+    
     
 for i in range(N):
-    if nodes[i].discovery == 0:
-        depth(graph, nodes, i)
+    if nodes[i].depth == 0:
+        bfs(graph, nodes, i, 0)
+        
+for i in range(len(nodes)):
+    print(nodes[i].toString())
+    
