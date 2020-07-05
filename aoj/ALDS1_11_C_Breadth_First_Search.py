@@ -4,7 +4,7 @@ class Node:
     __slots__ = ["key", "depth"]
     def __init__(self, key):
         self.key = key
-        self.depth = 0
+        self.depth = -1
         
     def toString(self):
         return "" + str(self.key + 1) + " " + str(self.depth)
@@ -23,21 +23,24 @@ nodes = []
 for i in range(N):
     nodes.append(Node(i))
 
-def bfs(Graph, Nodes, index, count):
-    stash = []
-    for v in range(N):
-        if Graph[index][v] == 1 and Nodes[v].depth == 0:
-            Nodes[v].depth = count + 1
-            stash.append(v)
+def bfs(Graph, Nodes):
+    depth = 0
+    Nodes[0].depth = depth
+    que = [Nodes[0]]
+    while que != []:
+        deque = que[0]
+        que = que[1:]
+        for v in range(N):
+            if Graph[deque.key][v] == 1 and Nodes[v].depth == -1:
+                Nodes[v].depth = deque.depth + 1
+                que.append(Nodes[v])
             
-    for v in range(len(stash)):
-        bfs(Graph, Nodes, stash[v], count + 1)
-        
     
-    
-for i in range(N):
-    if nodes[i].depth == 0:
-        bfs(graph, nodes, i, 0)
+for i in range(len(nodes)):
+    if nodes[i].key == 0:
+        nodes[i].depth = 0
+        bfs(graph, nodes)
+        break;
         
 for i in range(len(nodes)):
     print(nodes[i].toString())
