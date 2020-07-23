@@ -1,4 +1,5 @@
-TODO: 
+// TODO: シグネチャのオーバーロードがよくわかってないので学ぶ
+// https://typescript-jp.gitbook.io/deep-dive/type-system/functions
 type UserID = {
   id: string
   name: string
