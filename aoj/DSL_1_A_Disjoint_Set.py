@@ -1,6 +1,5 @@
 # NOTE
 # https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A
-
 n,m = map(int, input().rstrip().split())
 
 class Node:
@@ -14,7 +13,21 @@ class Node:
 
 nodes = [Node(i) for i in range(n)]
 
+def find(node):
+    while node.root != -1:
+        node = node.root
+        
+def same(x, y):
+    rx = find(x)
+    ry = find(y)
+    return True if rx.key == ry.key else False
+        
+# FIXME
+# forestのpresentativeを合併する
 def unit(x, y):
+    isSame = same(x,y)
+    if isSame == True:
+        return
     if x.rank < y.rank:
         y.parent = x
         root = x if x.root == -1 else x.root
@@ -26,18 +39,10 @@ def unit(x, y):
         x.root = root
         root.rank += x.rank != 0 if x.rank else 1
 
-# FIXME
-def same(x, y):
-    rx = x if x.root == -1 else x.root
-    ry = y if y.root == -1 else y.root
-    if rx.key == ry.key:
-        print("1")
-    else:
-        print("0")
-
 for _ in range(m):
     q, x, y = map(int, input().rstrip().split())
     if q == 0:
         unit(nodes[x], nodes[y])
     else:
-        same(nodes[x], nodes[y])
+        isSame = same(nodes[x], nodes[y])
+        print("1" if isSame == True else "0" )
