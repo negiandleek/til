@@ -16,28 +16,28 @@ nodes = [Node(i) for i in range(n)]
 def find(node):
     while node.root != -1:
         node = node.root
-        
+    return node
+    
 def same(x, y):
     rx = find(x)
     ry = find(y)
     return True if rx.key == ry.key else False
         
-# FIXME
-# forestのpresentativeを合併する
 def unit(x, y):
-    isSame = same(x,y)
-    if isSame == True:
+    rx = find(x)
+    ry = find(y)
+    if rx == ry:
         return
-    if x.rank < y.rank:
-        y.parent = x
-        root = x if x.root == -1 else x.root
-        y.root = root
-        root.rank += y.rank != 0 if y.rank else 1
+    if rx.rank < ry.rank:
+        ry.parent = rx
+        root = rx if rx.root == -1 else rx.root
+        ry.root = root
+        root.rank += ry.rank != 0 if ry.rank else 1
     else:
-        x.parent = y
-        root = y if y.root == -1 else y.root
-        x.root = root
-        root.rank += x.rank != 0 if x.rank else 1
+        rx.parent = ry
+        root = ry if ry.root == -1 else ry.root
+        rx.root = root
+        root.rank += rx.rank != 0 if rx.rank else 1
 
 for _ in range(m):
     q, x, y = map(int, input().rstrip().split())
