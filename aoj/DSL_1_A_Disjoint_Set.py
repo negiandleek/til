@@ -2,47 +2,45 @@
 # https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A
 n,m = map(int, input().rstrip().split())
 
-class Node:
-    def __init__(self, key):
-        self.key = key
-        self.root = -1
-        self.rank = 0
-        self.parent = -1
-    def toString(self):
-        return str(self.key) + ": rank: " + str(self.rank) + ": root:" + str(self.key if self.root == -1 else self.root.key)
-
-nodes = [Node(i) for i in range(n)]
-
-def find(node):
-    while node.root != -1:
-        node = node.root
-    return node
-    
-def same(x, y):
-    rx = find(x)
-    ry = find(y)
-    return True if rx.key == ry.key else False
+class Forest:
+    def __init__(self, n):
+        self.rank = [1] * n
+        self.parent = [-1] * n
+        self.root = [-1] * n
+    def boss(self, index):
+        if self.root[index] == -1:
+            return index
+        else:
+            self.root[index] = self.boss(self.root[index])
+            return self.root[index]
+    def find(self, index):
+        while self.root[index] != -1:
+            index = self.root[index]
+        return index
         
-def unit(x, y):
-    rx = find(x)
-    ry = find(y)
-    if rx == ry:
-        return
-    if rx.rank < ry.rank:
-        ry.parent = rx
-        root = rx if rx.root == -1 else rx.root
-        ry.root = root
-        root.rank += ry.rank != 0 if ry.rank else 1
-    else:
-        rx.parent = ry
-        root = ry if ry.root == -1 else ry.root
-        rx.root = root
-        root.rank += rx.rank != 0 if rx.rank else 1
+    def same(self, x, y):
+        rx = self.find(x)
+        ry = self.find(y)
+        return True if rx == ry else False
+        
+    def unit(self, x, y):
+        rx = self.boss(x)
+        ry = self.boss(y)
+        if rx == ry:
+            return
+        if self.rank[rx] < self.rank[ry]:
+            self.root[ry] = rx
+            self.rank[rx] += self.rank[ry]
+        else:
+            self.root[rx] = ry
+            self.rank[ry] += self.rank[rx]
+        
+forest = Forest(n)
 
 for _ in range(m):
     q, x, y = map(int, input().rstrip().split())
     if q == 0:
-        unit(nodes[x], nodes[y])
+        forest.unit(x, y)
     else:
-        isSame = same(nodes[x], nodes[y])
-        print("1" if isSame == True else "0" )
+        isSame = forest.same(x, y)
+        print("1" if isSame == True else "0")
