@@ -1,48 +1,79 @@
 # http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A
-# TODO:
-import math
+# TODO:import math
 
 n,m = map(int, input().rstrip().split())
 
-nodes = [[] for _ in range(n)]
+edges = [None for _ in range(m)]
+nodes = [None for _ in range(n)]
 
-for _ in range(m):
+class Edge:
+    def __init__(self, start, end, cost):
+        self.start = start
+        self.end = end
+        self.cost = cost
+    def toString(self):
+        print("" + str(self.start) + " " + str(self.end) + " " + str(self.cost))
+        
+class Node:
+    def __init__(self, key):
+        self.height = 1
+        self.key = key
+        self.root = -1
+        self.children = -1
+    def toString(self):
+        return "" + str(self.key) + " " + str(self.root)
+        
+for i in range(m):
     a,b,c = map(int, input().rstrip().split())
-    nodes[a].append((b, c))
-    nodes[b].append((a, c))
+    edges[i] = Edge(a,b,c)
     
+edges = sorted(edges, key=lambda value: value.cost)
+
+for i in range(n):
+    nodes[i] = Node(i)
+    
+def root(n):
+    if nodes[n].root == -1:
+        return n
+    nodes[n].root = root(nodes[n].root)
+    return nodes[n].root
+    
+def find(n):
+    if nodes[n].root == -1:
+        return n
+        
+    return root(nodes[n].root)
+    
+def some(a, b):
+    return root(a) == root(b)
+    
+
+def unit(a, b):
+    ra = root(a)
+    rb = root(b)
+    
+    if ra == rb:
+        return
+    
+    if nodes[a].height >= nodes[b].height:
+        nodes[b].root = ra
+        nodes[a].children = b
+        nodes[a].height += nodes[b].height
+    else:
+        nodes[a].root = rb
+        nodes[b].children = a
+        nodes[b].height += nodes[a].height
+
 def minimum():
-    d = [math.inf for _ in range(n)]
-    b = [0 for _ in range(n)]
+    global edges
+    d = 0
+    while edges:
+        edge = edges[0]
+        if some(edge.start, edge.end) == False:
+            unit(edge.start, edge.end)
+            d += edge.cost
+        edges = edges[1:]
     
-    d[0] = 0
-    
-    count = 0
-    while True:
-        cost = math.inf
-        u = -1
-        
-        for i in range(n):
-            if d[i] < cost and b[i] == 0:
-                cost = d[i]
-                u = i
-                
-        if cost == math.inf:
-            break;
-            
-        b[u] = 1
-        
-        for j in nodes[u]:
-            if d[j[0]] > j[1]:
-                d[j[0]] = j[1]
-        
-        count += 1
-        
     return d
-        
-result = minimum()
-answer = 0
-for value in result:
-    answer += value
-    
-print(answer)
+
+print(minimum())
