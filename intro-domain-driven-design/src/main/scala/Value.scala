@@ -1,6 +1,13 @@
 object Value extends App {
-  val fullName = "hoge fuga"
-  var tokens = fullName.split(" ")
-  var lastName = tokens(0)
-  println(lastName)
+  case class FirstName(value: String){
+    if(value.isEmpty() == true){
+      throw new IllegalArgumentException("error")
+    }
+  }
+  case class LastName(value: String){
+    if(value.isEmpty() == true){
+      throw new IllegalArgumentException("error")
+    }
+  }
+  case class FullName(fistName: FirstName, lastName: LastName)
 }
