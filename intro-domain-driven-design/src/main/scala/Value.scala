@@ -12,4 +12,13 @@ object Value extends App {
   }
 
   case class FullName(fistName: Name, lastName: Name)
+
+  case class Money(amount: Float, currency: String){
+    def add(money: Money): Money = {
+      if(currency != money.currency){
+        throw new IllegalArgumentException(s"通過単位が異なります")
+      }
+      return Money(amount + money.amount, currency)
+    }
+  }
 }
