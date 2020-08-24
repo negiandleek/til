@@ -21,4 +21,18 @@ object Value extends App {
       return Money(amount + money.amount, currency)
     }
   }
+
+  case class UserName(value: String)
+  case class UserId(){
+    val value = "test"
+  }
+  case class User(name: String){
+    var userName = UserName(name)
+    var userId = UserId()
+  }
+  def createUser(name: String): Unit = {
+    var user = User(name)
+//    誤った代入を防ぐ
+//    user.userId = "aaa"
+  }
 }
