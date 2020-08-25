@@ -1,5 +1,3 @@
-import java.util.UUID
-
 object Domain extends App{
   case class UserName(val value: String){
     if(value.isEmpty() == true){
@@ -14,7 +12,7 @@ object Domain extends App{
   }
 
   case class User(userName: UserName, key: String){
-//    val userID = UserID(UUID.randomUUID().toString)
+    //    val userID = UserID(UUID.randomUUID().toString)
     val userID = UserID(key)
     def equals(obj: User): Boolean = obj.userID == userID
   }
