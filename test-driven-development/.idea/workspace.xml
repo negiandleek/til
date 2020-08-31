@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Downloads/todo" value="PREVIEW" />
+        <entry key="$USER_HOME$/create_by_me/TodayQuest" value="PREVIEW" />
+        <entry key="$USER_HOME$/create_by_me/hello/springboot" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../demo" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../todo" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="201" />
+    <option name="y" value="23" />
+    <option name="width" value="1239" />
+    <option name="height" value="877" />
+  </component>
+</project>
