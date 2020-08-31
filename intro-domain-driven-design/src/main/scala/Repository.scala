@@ -19,18 +19,12 @@ object Repository extends App{
     def find(key: UserID): Boolean = {
       return userRepository.exists(it => it.userID == key)
     }
-  }
 
-  class Program(){
-    var repository = new UserRepository()
-
-    def createUser(name: String, key: String) = {
-      val user = User(UserName(name), key)
-      val userService = new UserService(repository)
-      if(userService.exists(user)){
-        throw new Error("ユーザーは存在しています")
-      }else{
-        repository.save(user)
+    def debug(name: String): Option[User] = {
+      val found: Option[User] = userRepository.find(it => it.userName.value == name)
+      return found match{
+        case Some(it) => Some(it.copy())
+        case None => None
       }
     }
   }
