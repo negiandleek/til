@@ -10,8 +10,8 @@ struct User{
     char *name;
 };
 
-void outputByValue(struct Student students[]);
-void outputByReference(struct Student strudents[]);
+void updateByValue(struct Student students[], char *name);
+void updateByReference(struct Student strudents[], char *name );
 
 int main(void){
     struct Student student[3] = {
@@ -40,22 +40,25 @@ int main(void){
         if(i == 2)printf("\n");
     }
     
-    outputByValue(student);
-    outputByReference(student);
+    char name[3] = "abc";
+    updateByValue(student, name);
+    updateByReference(student, name);
 }
 
-void outputByValue(struct Student students[]){
+void updateByValue(struct Student students[], char *name){
 	int i = 0;
 	for(i = 0; i < 3; i++){
-		printf("outputByValue%3d:%3s",students[i].no,students[i].name);
+	    strcpy(students[i].name, name);
+		printf("updateByValue%3d:%3s ",students[i].no,students[i].name);
 		if(i == 2)printf("\n");
 	}
 }
 
-void outputByReference(struct Student *p){
+void updateByReference(struct Student *p, char *name){
     int i = 0;
     for(i = 0; i < 3; i++){
-        printf("outputByReference%3d%3s", (p+i)->no, (p+i)->name);
+        strcpy((p+i)->name, name);
+        printf("updateByReference%3d%3s ", (p+i)->no, (p+i)->name);
         if(i == 2)printf("\n");
     }
 }
