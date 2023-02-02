@@ -10,8 +10,8 @@ def fizz_buzz(value)
     end
 end
 
-pp fizz_buzz(10)
-pp fizz_buzz(24)
-pp fizz_buzz(15)
-pp fizz_buzz(32)
+# pp fizz_buzz(10)
+# pp fizz_buzz(24)
+# pp fizz_buzz(15)
+# pp fizz_buzz(32)
         

@@ -65,3 +65,28 @@ pp 0o10
 pp 0x10
 pp 2e3
 pp 2e-3
+country = 'japan'
+pp case country
+when 'japan'
+    'こんにちは'
+when 'spain'
+    'ciao'
+else
+    'hello'
+end
+pp '---'
+def greet(suffix = '!') = "hello#{suffix}"
+pp greet('??')
+pp "---"
+def increment(n) 
+    n = n + 1
+    pp n
+end
+n = 10
+increment(10)
+pp n
+pp "---"
+require 'date'
+pp Date.today
+require_relative './2_fizz_buzz'
+pp fizz_buzz(45)
