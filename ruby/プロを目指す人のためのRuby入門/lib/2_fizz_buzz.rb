@@ -1,6 +1,6 @@
 def fizz_buzz(value)
     if value % 15 == 0
-        'Fizz Buzz'
+        'FizzBuzz'
     elsif value % 3 == 0
         'Fizz'
     elsif value % 5 == 0
@@ -9,7 +9,6 @@ def fizz_buzz(value)
         value.to_s
     end
 end
-
 # pp fizz_buzz(10)
 # pp fizz_buzz(24)
 # pp fizz_buzz(15)
